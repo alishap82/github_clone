@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+import Sidebar from "./Componemts/utility/Sidebar";
+// import MainContent from "./components/MainContent";
+// import Footer from "./components/Footer";
+import { Container, Row, Col } from "react-bootstrap";
+import CustomNavbar from "./Componemts/utility/CustomNavbar";
+import MainContent from "./Componemts/pages/MainContent";
+import RightSidebar from "./Componemts/pages/RightSidebar";
+import Popupsidebar from "./Componemts/pages/Popupsidebar";
+
+
+
+
+
+const App = () => {
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+const toggleSidebar = () => {
+  setIsSidebarOpen(!isSidebarOpen);
+};
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <CustomNavbar toggleSidebar={toggleSidebar} />
+    <Popupsidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <Container fluid>
+        <Row>
+          <Col md={3}><Sidebar /></Col>
+          <Col md={6}><MainContent /></Col>
+          <Col md={3}><RightSidebar /></Col>
+        </Row>
+      </Container>
+    </>
   );
-}
+};
 
 export default App;
+
