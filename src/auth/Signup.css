@@ -1,0 +1,13 @@
+.signup-container {
+    background: linear-gradient(135deg, #1e1e2f, #2a2a48);
+    color: white;
+    min-height: 100vh;
+  }
+  
+  .signup-card {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    border-radius: 10px;
+  }
+  
