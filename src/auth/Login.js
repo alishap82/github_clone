@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { Container, Card, Form, Button, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { auth, signInWithEmailAndPassword } from "../firebaseConfig"; 
+// import { auth, signInWithEmailAndPassword } from "../firebaseConfig"; 
+import { useNavigate } from "react-router-dom";
+// import { auth, signInWithEmailAndPassword } from "../firebaseConfig";
+import { auth } from "../firebaseConfig"; // go one level up if you're in /src/auth
+import { signInWithEmailAndPassword } from "firebase/auth"; // import from firebase/auth directly
+
+
 
 const Login = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -13,6 +20,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
       alert("Login Successful! 🎉");
+      navigate("/");
       // Redirect to dashboard or home page
     } catch (err) {
       setError("Invalid email or password. Please try again.");
@@ -71,7 +79,10 @@ const Login = () => {
       {/* Alternative Sign In */}
       <Card className="p-3 mt-3 text-center" style={{ width: "350px" }}>
         <a href="#" className="text-primary fw-bold">Sign in with a passkey</a>
-        <p className="mt-2">New to GitHub? <a href="#">Create an account</a></p>
+        <p className="mt-2">
+  New to GitHub? <a href="#" onClick={() => navigate("/signup")}>Create an account</a>
+</p>
+
       </Card>
 
       {/* Footer Links */}

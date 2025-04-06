@@ -1,7 +1,29 @@
 import React from "react";
 import { FaTimes } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+// import { auth, signInWithEmailAndPassword } from "../firebaseConfig";
+import { signOut } from "firebase/auth";
+import { useState } from "react";
+import { auth } from "../../firebaseConfig";
+// import { signOut } from "firebase/auth";
+
 
 const ProfileSidebar = ({ isOpen, toggleSidebar }) => {
+  const navigate = useNavigate();
+
+  // const handleSignOut = async () => {
+  //   try {
+  //     await signOut(auth); // Firebase logout
+  //     navigate("/login"); // Redirect to login page
+  //   } catch (error) {
+  //     console.error("Error signing out:", error);
+  //   }
+  // };
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      window.location.href = "/login"; // or use navigate()
+    });
+  };
   return (
     <div
       className={`profile-sidebar ${isOpen ? "open" : ""}`}
@@ -39,13 +61,26 @@ const ProfileSidebar = ({ isOpen, toggleSidebar }) => {
       <div className="mt-3">
         <h5>User</h5>
         <ul style={{ listStyle: "none", padding: 0, marginTop: "10px" }}>
-          <li><a href="/profile">Your Profile</a></li>
-          <li><a href="/repositories">Your Repositories</a></li>
-          <li><a href="/projects">Your Projects</a></li>
-          <li><a href="/stars">Your Stars</a></li>
-          <li><a href="/settings">Settings</a></li>
-          <li><a href="/signout">Sign Out</a></li>
-        </ul>
+  <li><a href="/profile" style={{ textDecoration: "none", color: "black" }}>Your Profile</a></li>
+  <li><a href="/repositories" style={{ textDecoration: "none", color: "black" }}>Your Repositories</a></li>
+  <li><a href="/projects" style={{ textDecoration: "none", color: "black" }}>Your Projects</a></li>
+  <li><a href="/stars" style={{ textDecoration: "none", color: "black" }}>Your Stars</a></li>
+  <li><a href="/settings" style={{ textDecoration: "none", color: "black" }}>Settings</a></li>
+  {/* <li><a href="/signout" style={{ textDecoration: "none", color: "black" }}>Sign Out</a></li> */}
+  <li>
+        <span
+          onClick={handleSignOut}
+          style={{
+            textDecoration: "none",
+            color: "black",
+            cursor: "pointer"
+          }}
+        >
+          Sign Out
+        </span>
+      </li>
+</ul>
+
       </div>
     </div>
   );

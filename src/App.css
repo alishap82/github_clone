@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+.blurred {
+  pointer-events: none;
+}
+.popup-link {
+  color: black;
+  text-decoration: none;
+}
+
+.popup-link:hover {
+  color: #333;
+}

@@ -1,20 +1,24 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import "./Signup.css"; // Custom CSS file
 
 const Signup = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
     console.log("Form Data:", data);
     alert("Signup successful!");
+    // You can navigate to the homepage or login after signup if needed
+    // navigate("/login");
   };
 
   return (
     <Container fluid className="signup-container">
       <Row className="vh-100 d-flex align-items-center justify-content-center">
-        
+
         {/* Left Side - Graphics */}
         <Col md={6} className="d-flex flex-column justify-content-center text-white p-5">
           <h1>Create your free account</h1>
@@ -28,11 +32,12 @@ const Signup = () => {
             <h4 className="mb-3">Sign up to GitHub</h4>
 
             <Form onSubmit={handleSubmit(onSubmit)}>
-
               {/* Email */}
               <Form.Group className="mb-3">
                 <Form.Label>Email*</Form.Label>
-                <Form.Control type="email" placeholder="Enter email"
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
                   {...register("email", { required: "Email is required" })}
                 />
                 {errors.email && <small className="text-danger">{errors.email.message}</small>}
@@ -41,8 +46,13 @@ const Signup = () => {
               {/* Password */}
               <Form.Group className="mb-3">
                 <Form.Label>Password*</Form.Label>
-                <Form.Control type="password" placeholder="Enter password"
-                  {...register("password", { required: "Password is required", minLength: { value: 8, message: "Must be at least 8 characters" } })}
+                <Form.Control
+                  type="password"
+                  placeholder="Enter password"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: { value: 8, message: "Must be at least 8 characters" },
+                  })}
                 />
                 {errors.password && <small className="text-danger">{errors.password.message}</small>}
               </Form.Group>
@@ -50,7 +60,9 @@ const Signup = () => {
               {/* Username */}
               <Form.Group className="mb-3">
                 <Form.Label>Username*</Form.Label>
-                <Form.Control type="text" placeholder="Enter username"
+                <Form.Control
+                  type="text"
+                  placeholder="Enter username"
                   {...register("username", { required: "Username is required" })}
                 />
                 {errors.username && <small className="text-danger">{errors.username.message}</small>}
@@ -70,7 +82,11 @@ const Signup = () => {
 
               {/* Email Preferences */}
               <Form.Group className="mb-3">
-                <Form.Check type="checkbox" label="Receive occasional product updates and announcements" {...register("emailPrefs")} />
+                <Form.Check
+                  type="checkbox"
+                  label="Receive occasional product updates and announcements"
+                  {...register("emailPrefs")}
+                />
               </Form.Group>
 
               {/* Submit Button */}
@@ -80,6 +96,14 @@ const Signup = () => {
             {/* Terms & Links */}
             <p className="mt-3 text-muted small">
               By creating an account, you agree to the <a href="#">Terms of Service</a>. Read the <a href="#">GitHub Privacy Statement</a>.
+            </p>
+
+            {/* Already have an account? Login */}
+            <p className="mt-2 text-center">
+              Already have an account?{" "}
+              <Button variant="outline-dark" size="sm" onClick={() => navigate("/login")}>
+                Log in
+              </Button>
             </p>
           </Card>
         </Col>

@@ -48,6 +48,9 @@ import Discussions from "./Componemts/pages/Discussions";
 import HomePage from "./Componemts/pages/HomePage";
 import CustomNavbar from "./Componemts/utility/CustomNavbar";
 import Login from "./auth/Login";
+import SignUP from "./auth/Signup";
+import Signup from "./auth/Signup";
+
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -61,13 +64,15 @@ function App() {
       <Popupsidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <div style={{ marginLeft: isSidebarOpen ? "250px" : "0", transition: "margin-left 0.3s ease-in-out" }}>
         <CustomNavbar toggleSidebar={toggleSidebar} />
-        <Login/>
+        {/* <Login/> */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/issues" element={<Issues />} />
           <Route path="/pull-requests" element={<PullRequests />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/discussions" element={<Discussions />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup/>} />
         </Routes>
       </div>
     </Router>
